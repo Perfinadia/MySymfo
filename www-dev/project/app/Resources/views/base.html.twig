@@ -21,7 +21,7 @@
                     {% block navigation %}
                         <nav>
                             <ul class="navigation">
-                                <li><a href="/app_dev.php">Home</a></li>
+                                <li><a href="{{ path('blogger_blog_homepage') }}">Home</a></li>
                                 <li><a href="{{ path('BloggerBlogBundle_about') }}">About</a></li>
                                 <li><a href="#">Contact</a></li>
                             </ul>
@@ -30,8 +30,8 @@
                 </div>
 
                 <hgroup>
-                    <h2>{% block blog_title %}<a href="#">symblog</a>{% endblock %}</h2>
-                    <h3>{% block blog_tagline %}<a href="#">creating a blog in Symfony2</a>{% endblock %}</h3>
+                    <h2>{% block blog_title %}<a href="/app_dev.php">symblog</a>{% endblock %}</h2>
+                    <h3>{% block blog_tagline %}<a href="/app_dev.php">creating a blog in Symfony2</a>{% endblock %}</h3>
                 </hgroup>
             </header>
 

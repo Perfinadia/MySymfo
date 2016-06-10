@@ -31,11 +31,18 @@ class PageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-             $message = \Swift_Message::newInstance()
-            ->setSubject('Contact enquiry from symblog')
-            ->setFrom('max.emilien96tera2@gmail.com')
-            ->setTo($this->container->getParameter('blogger_blog.emails.contact_email'))
-            ->setBody($this->renderView('BloggerBlogBundle:Page:contactemail.txt.twig', array('enquiry' => $enquiry)));
+            $message = \Swift_Message::newInstance();
+            $data = array(
+                array('enquiry' => $enquiry),
+                'image' => $message->embed(\Swift_Image::fromPath('../Image/image.jpg'))
+            );
+            $message->setSubject($enquiry->getSubject());
+            $message->setFrom($enquiry->getMail());
+            $message->setTo($this->container->getParameter('blogger_blog.emails.contact_email'));
+            $message->setBody($this->renderView('BloggerBlogBundle:Page:contactemail.html.twig', $data), 'text/html');
+            //$message->embed(\Swift_Image::fromPath('../Image/image.jpg'));
+            //->setBody($enquiry->getBody());
+
             $this->get('mailer')->send($message);
 
             //$this->get('session')->getFlashBag()->add('blogger-notice', 'Your contact enquiry was successfully sent. Thank you!');

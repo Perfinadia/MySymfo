@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Mon Site Test</title>
-  </head>
-  <body>
-    <h1>Bonjour !!!</h1>
+{% extends "OPPlatformBundle::layout.html.twig" %}
 
-    <p>
-      Le Hello World est un grand classique en programmation.
-      Il signifie énormément, car cela veut dire que vous avez
-      réussi à exécuter le programme pour accomplir une tâche simple :
-      afficher ce hello world !
-    </p>
-  </body>
-</html>
+{% block title %}
+  Accueil - {{ parent() }}
+{% endblock %}
+
+{% block ocplatform_body %}
+
+  <h2>Liste des annonces</h2>
+
+  <ul>
+    {% for advert in listAdverts %}
+      <li>
+        <a href="{{ path('View_page', {'id': advert.id}) }}">
+          {{ advert.title }}
+        </a>
+        par {{ advert.author }},
+        le {{ advert.date|date('d/m/Y') }}
+      </li>
+    {% else %}
+      <li>Pas (encore !) d'annonces</li>
+    {% endfor %}
+  </ul>
+
+{% endblock %}

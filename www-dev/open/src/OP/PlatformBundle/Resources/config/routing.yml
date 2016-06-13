@@ -1,8 +1,8 @@
 Home_page:
-    path:     /{page}
+    path:     /
     defaults:
         _controller:  OPPlatformBundle:Advert:index
-        page:         1
+        page: 1
     requirements:
         page: \d*
 

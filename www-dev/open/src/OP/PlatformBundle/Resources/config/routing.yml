@@ -1,5 +1,5 @@
 Home_page:
-    path:     /
+    path:     /{page}
     defaults:
         _controller:  OPPlatformBundle:Advert:index
         page:         1

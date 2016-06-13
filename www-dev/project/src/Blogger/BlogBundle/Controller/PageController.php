@@ -31,15 +31,14 @@ class PageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isValid()) {
+
             $message = \Swift_Message::newInstance();
-            $data = array(
-                array('enquiry' => $enquiry),
-                'image' => $message->embed(\Swift_Image::fromPath('../Image/image.jpg'))
-            );
+
+            //$image = $message->embed(\Swift_Image::fromPath('../Image/image.jpg'));
             $message->setSubject($enquiry->getSubject());
             $message->setFrom($enquiry->getMail());
             $message->setTo($this->container->getParameter('blogger_blog.emails.contact_email'));
-            $message->setBody($this->renderView('BloggerBlogBundle:Page:contactemail.html.twig', $data), 'text/html');
+            $message->setBody($this->renderView('BloggerBlogBundle:Page:contactemail.html.twig', array('enquiry' => $enquiry)), 'text/html');
             //$message->embed(\Swift_Image::fromPath('../Image/image.jpg'));
             //->setBody($enquiry->getBody());
 

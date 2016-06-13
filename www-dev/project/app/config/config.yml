@@ -35,7 +35,11 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-
+# FosUser Configuration
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: Blogger\BlogBundle\Entity\User
 # Doctrine Configuration
 doctrine:
     dbal:

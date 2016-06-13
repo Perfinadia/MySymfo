@@ -1,0 +1,4 @@
+services:
+#    op_platform.example:
+#        class: OP\PlatformBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]

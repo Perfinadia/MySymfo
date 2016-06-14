@@ -1,3 +1,18 @@
+#op_user:
+   # resource: "@OPUserBundle/Resources/config/routing.yml"
+   # prefix:   /
+
 op_platform:
     resource: "@OPPlatformBundle/Resources/config/routing.yml"
     prefix:   /
+
+login:
+    path: /login
+    defaults:
+        _controller:  OPUserBundle:Security:login
+
+login_check:
+    path: /login_check
+
+logout:
+    path: /logout

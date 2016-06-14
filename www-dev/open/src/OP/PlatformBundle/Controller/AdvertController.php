@@ -2,6 +2,9 @@
 // src/OP/PlatformBundle/Controller/AdvertController.php
 namespace OP\PlatformBundle\Controller;
 
+use OP\PlatformBundle\Entity\Advert;
+use OP\PlatformBundle\Entity\Application;
+use OP\PlatformBundle\Entity\Image;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,31 +52,69 @@ class AdvertController extends Controller
     
     public function viewAction($id)
     {
-        $advert = array(
-        'title'   => 'Recherche développpeur Symfony2',
-        'id'      => $id,
-        'author'  => 'Alexandre',
-        'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
-        'date'    => new \Datetime()
-        );
+        $em = $this->getDoctrine()->getManager();
+
+        // On récupère l'annonce $id
+        $advert = $em->getRepository('OPPlatformBundle:Advert')->find($id);
+
+        if (null === $advert) {
+          throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+        }
+
+        // On récupère la liste des candidatures de cette annonce
+        $listApplications = $em
+          ->getRepository('OPPlatformBundle:Application')
+          ->findBy(array('advert' => $advert))
+        ;
+
         return $this->render('OPPlatformBundle:Advert:view.html.twig', array(
-            'advert' => $advert
+          'advert'           => $advert,
+          'listApplications' => $listApplications
         ));
     }
 
     public function addAction(Request $request)
     {
-        // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
-        // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
-        //if ($request->isMethod('POST')) {
-            // Ici, on s'occupera de la création et de la gestion du formulaire
-            //$request->get('session')->getFlash('notice', 'Annonce bien enregistrée.');
-            $this->addFlash('notice', 'annonce bien enregistrée');
+        $advert = new Advert();
+        $advert->setTitle('Recherche developpeur Symfony.');
+        $advert->setAuthor('Alexandre');
+        $advert->setContent("Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…");
+        
+        // Création d'une première candidature
+        $application1 = new Application();
+        $application1->setAuthor('Marine');
+        $application1->setContent("J'ai toutes les qualités requises.");
+        $application1->setDate(new \DateTime());
+    
+        // Création d'une deuxième candidature par exemple
+        $application2 = new Application();
+        $application2->setAuthor('Pierre');
+        $application2->setContent("Je suis très motivé.");
+        $application2->setDate(new \DateTime());
+    
+        // On lie les candidatures à l'annonce
+        $application1->setAdvert($advert);
+        $application2->setAdvert($advert);
+        
+        $image = new Image();
+        $image->setUrl('http://sdz-upload.s3.amazonaws.com/prod/upload/job-de-reve.jpg');
+        $image->setAlt('Job de rêve');
+
+        $advert->setImage($image);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($advert);
+        $em->persist($application1);
+        $em->persist($application2);
+        $em->flush();
+        if ($request->isMethod('POST')) {
+            $this->addFlash('notice', 'Annonce bien enregistrée.');
             // Puis on redirige vers la page de visualisation de cettte annonce
-            return $this->redirectToRoute('View_page', array('id' => 5));
-        //}
+            return $this->redirectToRoute('View_page', array('id' => $advert->getId()));
+        }
+
         // Si on n'est pas en POST, alors on affiche le formulaire
-        //return $this->render('OPPlatformBundle:Advert:add.html.twig');
+        return $this->render('OPPlatformBundle:Advert:add.html.twig', array('advert' => $advert));
     }
 
     public function editAction($id, Request $request)
@@ -85,7 +126,17 @@ class AdvertController extends Controller
             $this->addFlash('notice', 'Annonce bien modifiée.');
             return $this->redirectToRoute('View_page', array('id' => $id));
         }
-        return $this->render('OPPlatformBundle:Advert:edit.html.twig');
+        $advert = array(
+            'title'   => 'Recherche développpeur Symfony',
+            'id'      => $id,
+            'author'  => 'Alexandre',
+            'content' => 'Nous recherchons un développeur Symfony débutant sur Lyon. Blabla…',
+            'date'    => new \Datetime()
+        );
+
+        return $this->render('OPPlatformBundle:Advert:edit.html.twig', array(
+            'advert' => $advert
+        ));
     }
 
     public function deleteAction($id)

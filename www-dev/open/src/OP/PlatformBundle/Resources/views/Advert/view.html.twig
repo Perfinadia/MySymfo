@@ -6,13 +6,21 @@
 
 {% block ocplatform_body %}
 
-  <h2>{{ advert.title }}</h2>
-  <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+  <h2>{% if advert.image is not null %}
+      <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
+    {% endif %}
+    {{ advert.getTitle() }}</h2>
+  <i>Par {{ advert.getAuthor() }}, le {{ advert.getDate()|date('d/m/Y') }}</i>
 
   <div class="well">
-    {{ advert.content }}
+    {{ advert.getContent() }}
   </div>
-
+  {% for app in listApplications %}
+    {{ app.getAuthor() }} le {{ app.getDate()|date('d/m/Y') }}.
+    <div class="well">
+      {{ app.getContent() }}
+    </div>
+  {% endfor %}
   <p>
     <a href="{{ path('Home_page') }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>

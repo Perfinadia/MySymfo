@@ -1,4 +1,7 @@
 services:
-#    op_platform.example:
-#        class: OP\PlatformBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    op_platform.antispam:
+        class: OP\PlatformBundle\Antispam\OPAntispam
+        arguments:
+            - "@mailer"
+            - %locale%
+            - 50

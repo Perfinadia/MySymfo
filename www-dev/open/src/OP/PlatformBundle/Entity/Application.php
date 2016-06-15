@@ -8,15 +8,15 @@ use Doctrine\ORM\Mapping as ORM;
  * Application
  *
  * @ORM\Table(name="application")
- * @ORM\Entity(repositoryClass="OP\PlatformBundle\Repository\ApplicationRepository")
+ * @ORM\Entity(repositoryClass="OP\PlatformBundle\Entity\ApplicationRepository")
  */
 class Application
 {
     /**
-     * @ORM\ManyToOne(targetEntity="OP\PlatformBundle\Entity\Advert")
+     * @ORM\ManyToOne(targetEntity="OP\PlatformBundle\Entity\Advert", inversedBy="applications")
      * @ORM\JoinColumn(nullable=false)
      */
-  private $advert;
+    private $advert;
 
     /**
      * @var int
@@ -48,6 +48,25 @@ class Application
      */
     private $date;
 
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function increase()
+    {
+        $this->getAdvert()->increaseApplication();
+    }
+
+    /**
+     * @ORM\PreRemove
+     */
+    public function decrease()
+    {
+        $this->getAdvert()->decreaseApplication();
+    }
 
     /**
      * Get id

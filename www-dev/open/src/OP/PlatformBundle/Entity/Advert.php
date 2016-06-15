@@ -2,13 +2,15 @@
 
 namespace OP\PlatformBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * Advert
  *
  * @ORM\Table(name="advert")
- * @ORM\Entity(repositoryClass="OP\PlatformBundle\Repository\AdvertRepository")
+ * @ORM\Entity(repositoryClass="OP\PlatformBundle\Entity\AdvertRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Advert
 {
@@ -59,9 +61,25 @@ class Advert
      */
     private $published = true;
 
+    /**
+     * @ORM\OneToMany(targetEntity="OP\PlatformBundle\Entity\Application", mappedBy="advert")
+     */
+    private $applications;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(name="nb_applications", type="integer")
+     */
+    private $nbApplications = 0;
+
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->applications = new ArrayCollection();
     }
 
     /**
@@ -216,5 +234,74 @@ class Advert
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * @param Application $application
+     */
+    public function addApplication(Application $application)
+    {
+        $this->applications[] = $application;
+
+        // On lie l'annonce à la candidature
+        $application->setAdvert($this);
+    }
+
+    /**
+     * @param Application $application
+     */
+    public function removeApplication(Application $application)
+    {
+        $this->applications->removeElement($application);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getApplications()
+    {
+        return $this->applications;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\Datetime $updatedAt = null)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param integer $nbApplications
+     */
+    public function setNbApplications($nbApplications)
+    {
+        $this->nbApplications = $nbApplications;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getNbApplications()
+    {
+        return $this->nbApplications;
+    }
+
+    public function increaseApplication()
+    {
+        $this->nbApplications++;
+    }
+    
+    public function decreaseApplication()
+    {
+        $this->nbApplications--;
     }
 }

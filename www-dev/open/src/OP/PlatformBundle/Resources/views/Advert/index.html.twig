@@ -8,17 +8,13 @@
 
   <h2>Liste des annonces</h2>
 
-  <ul>
-    {% for advert in listAdverts %}
-      <li>
-        <a href="{{ path('View_page', {'id': advert.id}) }}">
-          {{ advert.title }}
-        </a>
-        par {{ advert.author }},
-        le {{ advert.date|date('d/m/Y') }}
-      </li>
-    {% else %}
-      <li>Pas (encore !) d'annonces</li>
+  <ul class="pagination">
+    {% for a in listAdverts %}
+      <li class="active">{{ a.content }}</li>
+      <br>
+      {% if a.image is not defined %}
+        <img src="{{ a.image.url }}">
+      {% endif %}
     {% endfor %}
   </ul>
 

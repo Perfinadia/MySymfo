@@ -3,6 +3,8 @@
 namespace OP\PlatformBundle\Controller;
 
 use OP\PlatformBundle\Entity\Advert;
+use OP\PlatformBundle\Form\AdvertType;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,7 +32,7 @@ class AdvertController extends Controller
         $listAdverts = $this->getDoctrine()
             ->getManager()
             ->getRepository('OPPlatformBundle:Advert')
-            ->findAll()
+            ->findBy(array('published' => 1))
         ;
         
             // Et modifiez le 2nd argument pour injecter notre liste
@@ -67,19 +69,16 @@ class AdvertController extends Controller
 
     public function addAction(Request $request)
     {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTHOR')){
+            throw new AccessDeniedException('Accès limité aux auteurs');
+        }
         $em = $this->getDoctrine()->getManager();
         $advert = new Advert();
         $advert->setDate(new \Datetime());
+        $advert->setAuthor($this->getUser());
 
-        $form = $this->createFormBuilder($advert)
-            ->add('date',      DateType::class)
-            ->add('title',     TextType::class)
-            ->add('content',   TextareaType::class)
-            ->add('author',    TextType::class)
-            ->add('published', CheckboxType::class, array('required' => false))
-            ->add('save',      SubmitType::class)
-            ->getForm()
-        ;
+        $form = $this->createForm(new AdvertType(), $advert);
+
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
 
@@ -97,19 +96,15 @@ class AdvertController extends Controller
 
     public function editAction($id, Request $request)
     {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTHOR')){
+            throw new AccessDeniedException('Accès limité aux auteurs');
+        }
         $em = $this->getDoctrine()->getManager();
         $advert = $em->getRepository('OPPlatformBundle:Advert')->find($id);
         if (null === $advert) {
             throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
         }
-        $form = $this->createFormBuilder($advert)
-            ->add('date',      DateType::class)
-            ->add('title',     TextType::class)
-            ->add('content',   TextareaType::class)
-            ->add('author',    TextType::class)
-            ->add('published', CheckboxType::class, array('required' => false))
-            ->add('save',      SubmitType::class)
-            ->getForm()
+        $form = $this->createForm(new AdvertType(), $advert);
         ;
         // Ici encore, il faudra mettre la gestion du formulaire
         if ($request->isMethod('POST')) {
@@ -128,6 +123,9 @@ class AdvertController extends Controller
 
     public function deleteAction($id)
     {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+            throw new AccessDeniedException('Accès limité aux admins');
+        }
         $em = $this->getDoctrine()->getManager();
         $advert = $em->getRepository('OPPlatformBundle:Advert')->find($id);
         if (null === $advert) {
@@ -150,5 +148,14 @@ class AdvertController extends Controller
         return $this->render('OPPlatformBundle:Advert:menu.html.twig', array(
             'listAdverts' => $listAdverts
         ));
+    }
+
+    public function adminAction()
+    {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')){
+            throw new AccessDeniedException('Accès limité aux ADMINS');
+        }
+        $listUsers = $this->get('fos_user.user_manager')->findUsers();
+        return $this->render('OPPlatformBundle:Advert:Admin.html.twig', array('listUsers' => $listUsers));
     }
 }

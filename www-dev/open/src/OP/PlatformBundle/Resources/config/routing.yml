@@ -32,3 +32,8 @@ Delete_page:
         _controller:  OPPlatformBundle:Advert:delete
     requirements:
         id: \d+
+
+Admin_page:
+    path:     /admin
+    defaults:
+        _controller:  OPPlatformBundle:Advert:Admin

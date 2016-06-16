@@ -158,4 +158,12 @@ class AdvertController extends Controller
         $listUsers = $this->get('fos_user.user_manager')->findUsers();
         return $this->render('OPPlatformBundle:Advert:Admin.html.twig', array('listUsers' => $listUsers));
     }
+
+    public function applicationAction()
+    {
+        if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTHOR')){
+            throw new AccessDeniedException('Accès limité aux Auteurs');
+        }
+
+    }
 }

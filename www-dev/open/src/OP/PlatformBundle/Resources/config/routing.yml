@@ -37,3 +37,8 @@ Admin_page:
     path:     /admin
     defaults:
         _controller:  OPPlatformBundle:Advert:Admin
+
+Application_page:
+    path:     /application
+    defaults:
+        _controller:  OPPlatformBundle:Advert:Application

@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="21800d34-198d-4226-9c7a-ee4455e26c44" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config.yml" afterPath="$PROJECT_DIR$/app/config/config.yml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/routing.yml" afterPath="$PROJECT_DIR$/app/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Controller/AdvertController.php" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Controller/AdvertController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Form/ApplicationType.php" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Form/ApplicationType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Form/ImageType.php" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Form/ImageType.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/config/routing.yml" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/config/routing.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/Application.html.twig" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/Application.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/add.html.twig" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/add.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/delete.html.twig" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/delete.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/view.html.twig" afterPath="$PROJECT_DIR$/src/OP/PlatformBundle/Resources/views/Advert/view.html.twig" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/OP/UserBundle/Resources/views/layout.html.twig" afterPath="$PROJECT_DIR$/src/OP/UserBundle/Resources/views/layout.html.twig" />
     </list>
     <ignored path="open.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,8 +87,8 @@
       <file leaf-file-name="routing.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="330">
+              <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -532,12 +520,12 @@
       <workItem from="1465887522538" duration="16999000" />
       <workItem from="1465974286501" duration="20174000" />
       <workItem from="1466059962814" duration="14212000" />
-      <workItem from="1466148127488" duration="15673000" />
+      <workItem from="1466148127488" duration="16313000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83946000" />
+    <option name="totallyTimeSpent" value="84586000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="41" y="15" width="1399" height="789" extended-state="6" />
@@ -943,8 +931,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state relative-caret-position="330">
+          <caret line="22" column="31" selection-start-line="22" selection-start-column="31" selection-end-line="22" selection-end-column="31" />
           <folding />
         </state>
       </provider>

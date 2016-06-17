@@ -15,6 +15,7 @@
   <div class="well">
     {{ advert.getContent() }}
   </div>
+  <h1>Candidatures</h1>
   {% for app in listApplications %}
     {{ app.getAuthor() }} le {{ app.getDate()|date('d/m/Y') }}.
     <div class="well">
@@ -26,7 +27,7 @@
       <i class="glyphicon glyphicon-chevron-left"></i>
       Retour à la liste
     </a>
-    <a href="{{ path('Edit_page', {'id': advert.id}) }}" class="btn btn-default">
+    <a href="{{ path('Edit_page', {'id': advert.id}) }}" class="btn btn-default" target="_blank">
       <i class="glyphicon glyphicon-edit"></i>
       Modifier l'annonce
     </a>
@@ -34,7 +35,7 @@
       <i class="glyphicon glyphicon-trash"></i>
       Supprimer l'annonce
     </a>
-    <a href="{{ path('Applications_page', {'id' : advert.id}) }}" class="btn btn-default">
+    <a href="{{ path('Application_page', {'id' : advert.id}) }}" class="btn btn-default">
       <i class="glyphicon glypĥicon-edit"></i>
       Applications
     </a>

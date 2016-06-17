@@ -4,7 +4,9 @@
 
 op_platform:
     resource: "@OPPlatformBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}
+    requirements:
+        _locale: en|fr
 
 
 fos_user_security:

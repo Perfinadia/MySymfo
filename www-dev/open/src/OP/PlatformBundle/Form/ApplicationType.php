@@ -18,7 +18,7 @@ class ApplicationType extends AbstractType
             ->add('author')
             ->add('content')
             ->add('date', 'date')
-            ->add('advert')
+            ->add('submit', 'submit')
         ;
     }
     

@@ -1,24 +1,26 @@
 {% extends "OPPlatformBundle::layout.html.twig" %}
 
 {% block title %}
-  Ajouter une annonce - {{ parent() }}
+  {{ 'Ajouter une annonce -'|trans }} {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
 
-  <h2>Ajouter une annonce</h2>
+  <h2>{{ 'Ajouter une annonce'|trans }}</h2>
 
   {{ include("OPPlatformBundle:Advert:form.html.twig") }}
 
   <p>
-    Vous éditez une annonce déjà existante, merci de ne pas changer
-    l'esprit général de l'annonce déjà publiée.
+    {% trans %}
+      Vous éditez une annonce déjà existante,
+      merci de ne pas changer l'esprit général de l'annonce déjà publiée.
+    {% endtrans %}
   </p>
 
   <p>
     <a href="{{ path('View_page', {'id': 13}) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
-      Retour à l'annonce
+      {{ "Retour à l'annonce"|trans }}
     </a>
   </p>
 

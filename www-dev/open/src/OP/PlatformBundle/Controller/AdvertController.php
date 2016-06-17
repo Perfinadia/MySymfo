@@ -3,7 +3,9 @@
 namespace OP\PlatformBundle\Controller;
 
 use OP\PlatformBundle\Entity\Advert;
+use OP\PlatformBundle\Entity\Application;
 use OP\PlatformBundle\Form\AdvertType;
+use OP\PlatformBundle\Form\ApplicationType;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -76,7 +78,7 @@ class AdvertController extends Controller
         $advert = new Advert();
         $advert->setDate(new \Datetime());
         $advert->setAuthor($this->getUser());
-
+        
         $form = $this->createForm(new AdvertType(), $advert);
 
         if ($request->isMethod('POST')) {
@@ -140,7 +142,7 @@ class AdvertController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $listAdverts = $em->getRepository('OPPlatformBundle:Advert')->findBy(
-            array(),                 // Pas de critère
+            array('published' => 1),                 // Pas de critère
             array('date' => 'desc'), // On trie par date décroissante
             $limit,                  // On sélectionne $limit annonces
             0                        // À partir du premier
@@ -159,11 +161,31 @@ class AdvertController extends Controller
         return $this->render('OPPlatformBundle:Advert:Admin.html.twig', array('listUsers' => $listUsers));
     }
 
-    public function applicationAction()
+    public function applicationAction($id, Request $request)
     {
         if(!$this->get('security.authorization_checker')->isGranted('ROLE_AUTHOR')){
             throw new AccessDeniedException('Accès limité aux Auteurs');
         }
+        $em = $this->getDoctrine()->getManager();
+        $advert = $em->getRepository('OPPlatformBundle:Advert')->find($id);
+        $application = new Application();
+        $application->setAdvert($advert);
+        $application->setDate(new \DateTime());
+        
+        $form = $this->createForm(new ApplicationType(), $application);
 
+        if ($request->isMethod('POST')) {
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $em->persist($application);
+                $em->flush();
+                $this->addFlash('notice', 'Candidature ajoutée.');
+                return $this->redirectToRoute('View_page', array('id' => $id));
+            }
+        }
+        return $this->render('OPPlatformBundle:Advert:Application.html.twig', array(
+            'form' => $form->createView(),
+            'advert' => $advert
+        ));
     }
 }

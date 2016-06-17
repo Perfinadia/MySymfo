@@ -1,0 +1,16 @@
+{% extends "OPPlatformBundle::layout.html.twig" %}
+
+{% block ocplatform_body %}
+
+    <h2>Ajouter une candidature</h2>
+
+    {{ include("OPPlatformBundle:Advert:form.html.twig") }}
+
+    <p>
+        <a href="{{ path('View_page', {'id': advert.id}) }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à l'annonce
+        </a>
+    </p>
+
+{% endblock %}

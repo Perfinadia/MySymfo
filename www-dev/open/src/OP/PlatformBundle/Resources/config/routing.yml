@@ -39,6 +39,8 @@ Admin_page:
         _controller:  OPPlatformBundle:Advert:Admin
 
 Application_page:
-    path:     /application
+    path:     /application/{id}
     defaults:
         _controller:  OPPlatformBundle:Advert:Application
+    requirements:
+        id: \d+

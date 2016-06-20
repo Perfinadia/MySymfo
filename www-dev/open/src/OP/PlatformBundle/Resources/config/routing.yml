@@ -44,3 +44,7 @@ Application_page:
         _controller:  OPPlatformBundle:Advert:Application
     requirements:
         id: \d+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /{_locale}

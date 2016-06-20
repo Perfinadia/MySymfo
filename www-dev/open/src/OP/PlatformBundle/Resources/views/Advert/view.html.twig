@@ -1,7 +1,7 @@
 {% extends "OPPlatformBundle::layout.html.twig" %}
 
 {% block title %}
-  Lecture d'une annonce - {{ parent() }}
+  {{ "Lecture d'une annonce"|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
@@ -10,12 +10,12 @@
       <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}">
     {% endif %}
     {{ advert.getTitle() }}</h2>
-  <i>Par {{ advert.getAuthor() }}, le {{ advert.getDate()|date('d/m/Y') }}</i>
-
+  {#<i>Par {{ advert.getAuthor() }}, le {{ advert.getDate()|date('d/m/Y') }}, {{ 'Candidature(s)'|trans }} : {{ advert.nbApplications }}</i>#}
+  <i>{{ 'By'|trans({'%author%': advert.author, '%date%': advert.date|date('d M y'), '%nbApp%': advert.nbApplications}) }}</i>
   <div class="well">
     {{ advert.getContent() }}
   </div>
-  <h1>Candidatures</h1>
+  <h1>{{ 'Candidatures'|trans }}</h1>
   {% for app in listApplications %}
     {{ app.getAuthor() }} le {{ app.getDate()|date('d/m/Y') }}.
     <div class="well">
@@ -25,19 +25,19 @@
   <p>
     <a href="{{ path('Home_page') }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
-      Retour à la liste
+      {{ 'Retour à la liste'|trans }}
     </a>
     <a href="{{ path('Edit_page', {'id': advert.id}) }}" class="btn btn-default" target="_blank">
       <i class="glyphicon glyphicon-edit"></i>
-      Modifier l'annonce
+      {{ "Modifier l'annonce"|trans }}
     </a>
     <a href="{{ path('Delete_page', {'id': advert.id}) }}" class="btn btn-danger">
       <i class="glyphicon glyphicon-trash"></i>
-      Supprimer l'annonce
+      {{ "Supprimer l'annonce"|trans }}
     </a>
     <a href="{{ path('Application_page', {'id' : advert.id}) }}" class="btn btn-default">
       <i class="glyphicon glypĥicon-edit"></i>
-      Applications
+      {{ 'Candidatures'|trans }}
     </a>
   </p>
 

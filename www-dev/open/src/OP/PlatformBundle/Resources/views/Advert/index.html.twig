@@ -1,12 +1,12 @@
 {% extends "OPPlatformBundle::layout.html.twig" %}
 
 {% block title %}
-  Accueil - {{ parent() }}
+  {{ 'Accueil'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
 
-  <h2>Liste des annonces</h2>
+  <h2>{{ 'Liste des annonces'|trans }}</h2>
 
   <ul class="pagination">
     {% for a in listAdverts %}

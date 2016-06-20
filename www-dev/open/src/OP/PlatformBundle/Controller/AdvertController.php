@@ -114,7 +114,7 @@ class AdvertController extends Controller
             if($form->isValid()) {
                 $em->flush();
                 $this->addFlash('notice', 'Annonce bien modifiée.');
-                return $this->redirectToRoute('View_page', array('id' => $advert->getId()));
+                return $this->redirectToRoute('View_page', array('id' => $id));
             }
         }
         return $this->render('OPPlatformBundle:Advert:edit.html.twig', array(
@@ -133,7 +133,7 @@ class AdvertController extends Controller
         if (null === $advert) {
             throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
         }
-        //$em->remove($advert);
+        $em->remove($advert);
         $em->flush();
         return $this->render('OPPlatformBundle:Advert:delete.html.twig');
     }
@@ -170,6 +170,7 @@ class AdvertController extends Controller
         $advert = $em->getRepository('OPPlatformBundle:Advert')->find($id);
         $application = new Application();
         $application->setAdvert($advert);
+        $application->setAuthor($this->getUser());
         $application->setDate(new \DateTime());
         
         $form = $this->createForm(new ApplicationType(), $application);
@@ -177,6 +178,7 @@ class AdvertController extends Controller
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);
             if($form->isValid()) {
+                $advert->addApplication($application);
                 $em->persist($application);
                 $em->flush();
                 $this->addFlash('notice', 'Candidature ajoutée.');

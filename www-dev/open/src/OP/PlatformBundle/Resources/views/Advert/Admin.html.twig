@@ -1,18 +1,18 @@
 {% extends "OPPlatformBundle::layout.html.twig" %}
 
 {% block title %}
-    Admin space - {{ parent() }}
+    {{ 'Espace Administrateur'|trans }} - {{ parent() }}
 {% endblock %}
 
 {% block ocplatform_body %}
 
-    <h2>Liste des utilisateurs</h2>
+    <h2>{{ 'Liste des utilisateurs'|trans }}</h2>
 
     <ul class="pagination">
         {% for u in listUsers %}
             <li class="active"> pseudo : {{ u.username }} - mail : {{ u.email }} - role :
                 {% for r in u.roles %}
-                    {{ r }}
+                    - {{ r }}
                 {% endfor %}
             </li><br>
         {% endfor %}

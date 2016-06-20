@@ -20,7 +20,7 @@ class AdvertType extends AbstractType
             ->add('author')
             ->add('content')
             ->add('published', 'checkbox', array('required' => false))
-            ->add('image', new ImageType())
+            ->add('image', new ImageType(), array('required' => false))
             ->add('save', 'submit')
         ;
     }

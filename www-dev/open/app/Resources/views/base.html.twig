@@ -19,27 +19,22 @@
   {% endif %}
   <div class="container">
     <div id="header" class="jumbotron">
-      <h1>Ma plateforme d''annonces</h1>
+      <h1>Ma plateforme d'annonces</h1>
       <p>
-        Ce projet est propulsé par Symfony,
-        et construit grâce au MOOC OpenClassrooms et SensioLabs.
-      </p>
-      <p>
-        <a class="btn btn-primary btn-lg" href="https://openclassrooms.com/courses/developpez-votre-site-web-avec-le-framework-symfony2">
-            Participer au MOOC »
-        </a>
+          {% trans %}Ce projet est propulsé par Symfony,
+          et construit grâce au MOOC OpenClassrooms et SensioLabs.{% endtrans %}
       </p>
     </div>
     <div class="row">
         <div id="menu" class="col-md-3">
         <h3>Les annonces</h3>
         <ul class="nav nav-pills nav-stacked">
-          <li><a href="{{ path('Home_page') }}">Accueil</a></li>
-          <li><a href="{{ path('Add_page') }}">Ajouter une annonce</a></li>
-          <li><a href="{{ path('Admin_page') }}">Controle Administrateur</a></li>
+          <li><a href="{{ path('Home_page') }}">{{ 'Accueil'|trans }}</a></li>
+          <li><a href="{{ path('Add_page') }}">{{ 'Ajouter une annonce'|trans }}</a></li>
+          <li><a href="{{ path('Admin_page') }}">{{ 'Controle Administrateur'|trans }}</a></li>
         </ul>
-        <h4>Dernières annonces</h4>
-        {{ render(controller("OPPlatformBundle:Advert:menu", {'limit': 3})) }}
+        <h4>{{ 'Dernières annonces'|trans }}</h4>
+        {{ render(controller("OPPlatformBundle:Advert:menu", {'limit': 10})) }}
       </div>
       <div id="content" class="col-md-9">
         {% block body %}

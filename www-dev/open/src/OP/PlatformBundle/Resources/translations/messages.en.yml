@@ -2,3 +2,35 @@
 'Ajouter une annonce': 'Add an anouncement'
 "Vous éditez une annonce déjà existante,\n      merci de ne pas changer l'esprit général de l'annonce déjà publiée.": "You are editing an aouncement,\n      please keep in mind the spec of the anouncement already published"
 'Retour à l''annonce': 'Back to the anouncement'
+'Modifier une annonce': '__Modifier une annonce'
+"Vous éditez une annonce déjà existante, merci de ne pas changer\n    l'esprit général de l'annonce déjà publiée.": "You are editing an aouncement,\n    please keep in mind the spec of the anouncement already published"
+'Lecture d''une annonce': 'Reading anoucement'
+Candidatures: Applications
+'Retour à la liste': 'Back to list'
+'Modifier l''annonce': 'Edit anoouncement'
+'Supprimer l''annonce': 'Delete anouncement'
+'Supprimer une annonce': 'Delete an anouncement'
+'Etes-vous certain de vouloir supprimer l''annonce': 'Are you willing to delete permanently this anouncement'
+'Formulaire d''annonce': 'Anouncement form'
+'Espace Administrateur': 'Admin Space'
+'Liste des utilisateurs': 'User list'
+Accueil: Home
+'Liste des annonces': 'Anouncements list'
+'Ajouter une candidature': 'Add an application'
+
+
+advert:
+  add:
+    title:  Add an anouncement
+  edit:
+    title:  Edit an anoucement
+  view:
+    title:  Anouncements' list
+  index:
+  delete:
+  admin:
+  appli:
+  menu:
+layout:
+  title:  Anouncement
+By: By %author% the %date% - %nbApp% Application

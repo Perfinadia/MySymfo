@@ -21,16 +21,20 @@ Accueil: Home
 
 advert:
   add:
-    title:  Add an anouncement
+    title:  "Add an anouncement"
   edit:
-    title:  Edit an anoucement
+    title:  "Edit an anoucement"
   view:
-    title:  Anouncements' list
+    title:  "Anouncements' list"
   index:
   delete:
   admin:
+    test: "{0}Anounce %id% - non-published - %title% - by %author%.|{1}Anounce %id% - published - %title% - by %author%."
   appli:
-  menu:
+
+base:
+  title:  "My anouncement's platform"
+  anounce: "This project is propulsed by Symfony and build with MOOC OpenClassrooms and SensioLabs."
 layout:
-  title:  Anouncement
-By: By %author% the %date% - %nbApp% Application
+  title:  "Anouncement"
+By: "By %author% the %date% - %nbApp% Application"

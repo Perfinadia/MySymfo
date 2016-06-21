@@ -17,4 +17,20 @@
             </li><br>
         {% endfor %}
     </ul>
+    <h2>{{ 'Liste des anonces' }}</h2>
+    <ul class="pagination">
+        {% for ad in adList %}
+            <li class="active">
+                <p>
+                <a href="{{ path('Edit_page', {'id': ad.id}) }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+                <a href="{{ path('Delete_page', {'id': ad.id}) }}" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+                    {{ 'advert.admin.test'|transchoice(ad.published, {'%id%' : ad.id, '%author%' : ad.author, '%title%' : ad.title}) }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

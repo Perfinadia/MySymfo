@@ -1,0 +1,7 @@
+Déconnexion: "Logout"
+connexion: "Log in"
+base.title: "My anouncement's platform"
+base.anounce: "This project is propulsed by Symfony and build with MOOC OpenClassrooms and SensioLabs."
+'Ajouter une annonce': 'Add an anounce'
+'Controle Administrateur': 'Admin Controller'
+'Dernières annonces': 'Latest anounces'

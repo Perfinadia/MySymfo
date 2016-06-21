@@ -135,7 +135,8 @@ class AdvertController extends Controller
         }
         $em->remove($advert);
         $em->flush();
-        return $this->render('OPPlatformBundle:Advert:delete.html.twig');
+        $ladvert = $em->getRepository('OPPlatformBundle:Advert')->findBy(array('published' => 1));
+        return $this->render('OPPlatformBundle:Advert:index.html.twig', array('listAdverts' => $ladvert));
     }
 
     public function menuAction($limit)
@@ -158,7 +159,10 @@ class AdvertController extends Controller
             throw new AccessDeniedException('Accès limité aux ADMINS');
         }
         $listUsers = $this->get('fos_user.user_manager')->findUsers();
-        return $this->render('OPPlatformBundle:Advert:Admin.html.twig', array('listUsers' => $listUsers));
+        $lAd = $this->getDoctrine()->getRepository('OPPlatformBundle:Advert')->findAll();
+        return $this->render('OPPlatformBundle:Advert:Admin.html.twig', array(
+            'listUsers' => $listUsers, 'adList' => $lAd
+        ));
     }
 
     public function applicationAction($id, Request $request)
